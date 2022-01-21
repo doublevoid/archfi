@@ -1670,7 +1670,7 @@ archbootloaderrefindmenu(){
 		nextblitem=${1}
 	fi
 	options=()
-	options+=("${txtinstall//%1/refind}" "pacstrap refind-efi")
+	options+=("${txtinstall//%1/refind}" "pacstrap refind")
 	options+=("${txtedit//%1/refind_linux.conf}" "(${txtoptional})")
 	sel=$(whiptail --backtitle "${apptitle}" --title "${txtbootloaderrefindmenu}" --menu "" --cancel-button "${txtback}" --default-item "${nextblitem}" 0 0 0 \
 		"${options[@]}" \
@@ -1699,7 +1699,7 @@ archrefindinstall(){
 	echo "echo \"\\\"Arch Linux Fallback\\\" \\\"root=UUID=${rootuuid} rw add_efi_memmap initrd=/initramfs-linux-fallback.img\\\"\" >> /mnt/boot/refind_linux.conf"
 	echo "echo \"\\\"Arch Linux Terminal\\\" \\\"root=UUID=${rootuuid} rw add_efi_memmap systemd.unit=multi-user.target\\\"\" >> /mnt/boot/refind_linux.conf"
 
-	pacstrap /mnt refind-efi
+	pacstrap /mnt refind
 	archchroot refindbootloaderinstall ${realrootdev}
 	rootuuid=$(blkid -s UUID -o value ${realrootdev})
 	echo "\"Arch Linux         \" \"root=UUID=${rootuuid} rw add_efi_memmap\"" > /mnt/boot/refind_linux.conf
